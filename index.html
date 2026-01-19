@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Meme Generator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Press+Start+2P&display=swap">
+</head>
+<body style="margin: 0; padding: 20px; font-family: 'Comic Neue', cursive; background: linear-gradient(135deg, #ffcc00, #ff0066, #00ccff); min-height: 100vh;">
+
+    <!-- Header -->
+    <header style="text-align: center; padding: 20px; background: rgba(0,0,0,0.8); border-radius: 20px; margin-bottom: 30px; border: 8px solid white;">
+        <h1 style="font-family: 'Press Start 2P', cursive; color: #ffcc00; margin: 0; font-size: 2.5rem; text-shadow: 4px 4px 0 #ff0066;">RETRO MEME GENERATOR</h1>
+        <p style="color: white; font-size: 1.2rem; margin-top: 10px;">Create your own vintage-style memes in seconds!</p>
+    </header>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; max-width: 1400px; margin: 0 auto;">
+        
+        <!-- Meme Preview Area -->
+        <div style="flex: 1; min-width: 500px; background: rgba(0,0,0,0.8); border-radius: 20px; padding: 20px; border: 8px solid white; box-shadow: 10px 10px 0 rgba(0,0,0,0.3);">
+            <h2 style="font-family: 'Press Start 2P', cursive; color: #00ccff; text-align: center; margin-top: 0; font-size: 1.5rem;">MEME PREVIEW</h2>
+            
+            <div id="memeContainer" style="position: relative; width: 100%; height: 400px; overflow: hidden; background: #222; border-radius: 10px; border: 5px solid #ffcc00;">
+                <img id="memeImage" src="https://images.unsplash.com/photo-1543857778-c4a1a569e388?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Meme template" style="width: 100%; height: 100%; object-fit: cover;">
+                
+                <!-- Top text -->
+                <div id="topText" style="position: absolute; top: 20px; left: 0; width: 100%; text-align: center; font-family: 'Impact', sans-serif; font-size: 42px; color: white; text-shadow: 4px 4px 0 black, -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black, 2px 2px 0 black; padding: 0 10px;">
+                    WHEN YOU FINISH
+                </div>
+                
+                <!-- Bottom text -->
+                <div id="bottomText" style="position: absolute; bottom: 20px; left: 0; width: 100%; text-align: center; font-family: 'Impact', sans-serif; font-size: 42px; color: white; text-shadow: 4px 4px 0 black, -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black, 2px 2px 0 black; padding: 0 10px;">
+                    THE HTML/CSS/JS PROJECT
+                </div>
+                
+                <!-- Watermark -->
+                <div style="position: absolute; bottom: 10px; right: 10px; color: rgba(255,255,255,0.5); font-size: 12px; font-family: Arial;">
+                    dankmemes.com
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="downloadBtn" style="background: #ff0066; color: white; border: none; padding: 15px 30px; font-size: 1.2rem; border-radius: 50px; font-family: 'Press Start 2P', cursive; cursor: pointer; box-shadow: 5px 5px 0 #ffcc00;">
+                    DOWNLOAD MEME
+                </button>
+                <button id="randomBtn" style="background: #00ccff; color: white; border: none; padding: 15px 30px; font-size: 1.2rem; border-radius: 50px; font-family: 'Press Start 2P', cursive; cursor: pointer; margin-left: 15px; box-shadow: 5px 5px 0 #ffcc00;">
+                    RANDOMIZE
+                </button>
+            </div>
+        </div>
+        
+        <!-- Controls -->
+        <div style="flex: 1; min-width: 400px; background: rgba(0,0,0,0.8); border-radius: 20px; padding: 20px; border: 8px solid white; box-shadow: 10px 10px 0 rgba(0,0,0,0.3);">
+            <h2 style="font-family: 'Press Start 2P', cursive; color: #ffcc00; text-align: center; margin-top: 0; font-size: 1.5rem;">CUSTOMIZE MEME</h2>
+            
+            <!-- Image Selector -->
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #00ccff; font-size: 1.3rem; margin-bottom: 10px;">SELECT TEMPLATE</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    <button class="template-btn" data-img="https://images.unsplash.com/photo-1543857778-c4a1a569e388?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="flex: 1; min-width: 120px; height: 80px; background-size: cover; background-position: center; border: 3px solid #ffcc00; border-radius: 5px; cursor: pointer;"></button>
+                    <button class="template-btn" data-img="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="flex: 1; min-width: 120px; height: 80px; background-size: cover; background-position: center; border: 3px solid #00ccff; border-radius: 5px; cursor: pointer;"></button>
+                    <button class="template-btn" data-img="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80" style="flex: 1; min-width: 120px; height: 80px; background-size: cover; background-position: center; border: 3px solid #ff0066; border-radius: 5px; cursor: pointer;"></button>
+                    <button class="template-btn" data-img="https://images.unsplash.com/photo-1514888286974-6d03bde4ba42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="flex: 1; min-width: 120px; height: 80px; background-size: cover; background-position: center; border: 3px solid #ffcc00; border-radius: 5px; cursor: pointer;"></button>
+                </div>
+            </div>
+            
+            <!-- Text Inputs -->
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #00ccff; font-size: 1.3rem; margin-bottom: 10px;">MEME TEXT</h3>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; color: white; margin-bottom: 5px;">TOP TEXT</label>
+                    <input type="text" id="topTextInput" value="WHEN YOU FINISH" style="width: 100%; padding: 12px; border-radius: 10px; border: 3px solid #ff0066; font-size: 1.2rem; font-family: 'Comic Neue', cursive;">
+                </div>
+                <div>
+                    <label style="display: block; color: white; margin-bottom: 5px;">BOTTOM TEXT</label>
+                    <input type="text" id="bottomTextInput" value="THE HTML/CSS/JS PROJECT" style="width: 100%; padding: 12px; border-radius: 10px; border: 3px solid #ff0066; font-size: 1.2rem; font-family: 'Comic Neue', cursive;">
+                </div>
+            </div>
+            
+            <!-- Text Styles -->
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #00ccff; font-size: 1.3rem; margin-bottom: 10px;">TEXT STYLE</h3>
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <button class="style-btn" data-style="impact" style="flex: 1; padding: 10px; background: #ffcc00; border: none; border-radius: 5px; font-family: 'Impact', sans-serif; cursor: pointer;">IMPACT</button>
+                    <button class="style-btn" data-style="comic" style="flex: 1; padding: 10px; background: #00ccff; border: none; border-radius: 5px; font-family: 'Comic Neue', cursive; font-weight: bold; cursor: pointer;">COMIC</button>
+                    <button class="style-btn" data-style="retro" style="flex: 1; padding: 10px; background: #ff0066; border: none; border-radius: 5px; font-family: 'Press Start 2P', cursive; cursor: pointer;">RETRO</button>
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button class="color-btn" data-color="white" style="flex: 1; padding: 15px; background: white; border: 3px solid #ccc; border-radius: 5px; cursor: pointer;"></button>
+                    <button class="color-btn" data-color="yellow" style="flex: 1; padding: 15px; background: #ffcc00; border: 3px solid #ccc; border-radius: 5px; cursor: pointer;"></button>
+                    <button class="color-btn" data-color="red" style="flex: 1; padding: 15px; background: #ff0066; border: 3px solid #ccc; border-radius: 5px; cursor: pointer;"></button>
+                    <button class="color-btn" data-color="blue" style="flex: 1; padding: 15px; background: #00ccff; border: 3px solid #ccc; border-radius: 5px; cursor: pointer;"></button>
+                </div>
+            </div>
+            
+            <!-- Meme Ideas -->
+            <div>
+                <h3 style="color: #00ccff; font-size: 1.3rem; margin-bottom: 10px;">QUICK IDEAS</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    <button class="idea-btn" data-top="ONE DOES NOT SIMPLY" data-bottom="MAKE INLINE CSS LOOK GOOD" style="flex: 1; min-width: 180px; padding: 10px; background: #333; color: white; border: 2px solid #ffcc00; border-radius: 5px; cursor: pointer; font-family: 'Comic Neue', cursive;">LOTR Meme</button>
+                    <button class="idea-btn" data-top="WHAT IF I TOLD YOU" data-bottom="INLINE JS CAN BE FUN" style="flex: 1; min-width: 180px; padding: 10px; background: #333; color: white; border: 2px solid #00ccff; border-radius: 5px; cursor: pointer; font-family: 'Comic Neue', cursive;">Matrix Meme</button>
+                    <button class="idea-btn" data-top="OLD INTERNET MEMES" data-bottom="NEVER DIE" style="flex: 1; min-width: 180px; padding: 10px; background: #333; color: white; border: 2px solid #ff0066; border-radius: 5px; cursor: pointer; font-family: 'Comic Neue', cursive;">Classic</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer style="text-align: center; margin-top: 40px; color: white; font-size: 0.9rem; padding: 20px; background: rgba(0,0,0,0.7); border-radius: 10px;">
+        <p>RETRO MEME GENERATOR • MADE WITH INLINE HTML, CSS & JAVASCRIPT • ALL YOUR MEME ARE BELONG TO US</p>
+        <p id="memeCount" style="color: #ffcc00; font-weight: bold;">MEMES GENERATED TODAY: 0</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // DOM Elements
+        const topTextElement = document.getElementById('topText');
+        const bottomTextElement = document.getElementById('bottomText');
+        const topTextInput = document.getElementById('topTextInput');
+        const bottomTextInput = document.getElementById('bottomTextInput');
+        const memeImage = document.getElementById('memeImage');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const randomBtn = document.getElementById('randomBtn');
+        const memeCountElement = document.getElementById('memeCount');
+        
+        // Meme counter
+        let memeCount = 0;
+        
+        // Initialize template buttons
+        document.querySelectorAll('.template-btn').forEach(btn => {
+            btn.style.backgroundImage = `url('${btn.getAttribute('data-img')}')`;
+            btn.addEventListener('click', function() {
+                memeImage.src = this.getAttribute('data-img');
+                updateMemeCount();
+            });
+        });
+        
+        // Text input events
+        topTextInput.addEventListener('input', function() {
+            topTextElement.textContent = this.value.toUpperCase();
+        });
+        
+        bottomTextInput.addEventListener('input', function() {
+            bottomTextElement.textContent = this.value.toUpperCase();
+        });
+        
+        // Style buttons
+        document.querySelectorAll('.style-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const style = this.getAttribute('data-style');
+                
+                if (style === 'impact') {
+                    topTextElement.style.fontFamily = "Impact, sans-serif";
+                    bottomTextElement.style.fontFamily = "Impact, sans-serif";
+                    topTextElement.style.fontSize = "42px";
+                    bottomTextElement.style.fontSize = "42px";
+                } else if (style === 'comic') {
+                    topTextElement.style.fontFamily = "'Comic Neue', cursive";
+                    bottomTextElement.style.fontFamily = "'Comic Neue', cursive";
+                    topTextElement.style.fontWeight = "bold";
+                    bottomTextElement.style.fontWeight = "bold";
+                    topTextElement.style.fontSize = "38px";
+                    bottomTextElement.style.fontSize = "38px";
+                } else if (style === 'retro') {
+                    topTextElement.style.fontFamily = "'Press Start 2P', cursive";
+                    bottomTextElement.style.fontFamily = "'Press Start 2P', cursive";
+                    topTextElement.style.fontSize = "24px";
+                    bottomTextElement.style.fontSize = "24px";
+                }
+                
+                updateMemeCount();
+            });
+        });
+        
+        // Color buttons
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const color = this.getAttribute('data-color');
+                topTextElement.style.color = color;
+                bottomTextElement.style.color = color;
+                updateMemeCount();
+            });
+        });
+        
+        // Idea buttons
+        document.querySelectorAll('.idea-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const top = this.getAttribute('data-top');
+                const bottom = this.getAttribute('data-bottom');
+                
+                topTextInput.value = top;
+                bottomTextInput.value = bottom;
+                
+                topTextElement.textContent = top;
+                bottomTextElement.textContent = bottom;
+                
+                updateMemeCount();
+            });
+        });
+        
+        // Random meme button
+        randomBtn.addEventListener('click', function() {
+            // Random templates
+            const templates = [
+                'https://images.unsplash.com/photo-1543857778-c4a1a569e388?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80',
+                'https://images.unsplash.com/photo-1514888286974-6d03bde4ba42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1561948955-570b270e7c36?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1573865526739-10659fec78a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            ];
+            
+            // Random texts
+            const topTexts = [
+                "WHEN THE CODE",
+                "ME TRYING TO EXPLAIN",
+                "HOW IT FEELS TO",
+                "WHEN SOMEONE SAYS",
+                "MY REACTION WHEN",
+                "INTERNET BE LIKE"
+            ];
+            
+            const bottomTexts = [
+                "FINALLY WORKS",
+                "INLINE STYLING",
+                "USE JAVASCRIPT",
+                "CSS IS EASY",
+                "DEBUG FOR 5 HOURS",
+                "WEBSITE LOADS"
+            ];
+            
+            // Random colors
+            const colors = ['white', 'yellow', '#ff0066', '#00ccff', '#00ff00', '#ff9900'];
+            
+            // Random styles
+            const styles = ['impact', 'comic', 'retro'];
+            
+            // Apply random selections
+            memeImage.src = templates[Math.floor(Math.random() * templates.length)];
+            
+            const randomTop = topTexts[Math.floor(Math.random() * topTexts.length)];
+            const randomBottom = bottomTexts[Math.floor(Math.random() * bottomTexts.length)];
+            
+            topTextInput.value = randomTop;
+            bottomTextInput.value = randomBottom;
+            topTextElement.textContent = randomTop;
+            bottomTextElement.textContent = randomBottom;
+            
+            // Random color
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            topTextElement.style.color = randomColor;
+            bottomTextElement.style.color = randomColor;
+            
+            // Random style
+            const randomStyle = styles[Math.floor(Math.random() * styles.length)];
+            if (randomStyle === 'impact') {
+                topTextElement.style.fontFamily = "Impact, sans-serif";
+                bottomTextElement.style.fontFamily = "Impact, sans-serif";
+                topTextElement.style.fontSize = "42px";
+                bottomTextElement.style.fontSize = "42px";
+            } else if (randomStyle === 'comic') {
+                topTextElement.style.fontFamily = "'Comic Neue', cursive";
+                bottomTextElement.style.fontFamily = "'Comic Neue', cursive";
+                topTextElement.style.fontSize = "38px";
+                bottomTextElement.style.fontSize = "38px";
+            } else if (randomStyle === 'retro') {
+                topTextElement.style.fontFamily = "'Press Start 2P', cursive";
+                bottomTextElement.style.fontFamily = "'Press Start 2P', cursive";
+                topTextElement.style.fontSize = "24px";
+                bottomTextElement.style.fontSize = "24px";
+            }
+            
+            updateMemeCount();
+        });
+        
+        // Download meme button (simulated)
+        downloadBtn.addEventListener('click', function() {
+            alert("Meme downloaded! (This is a demo - in a real app, this would save the meme image)");
+            updateMemeCount();
+        });
+        
+        // Update meme counter
+        function updateMemeCount() {
+            memeCount++;
+            memeCountElement.textContent = `MEMES GENERATED TODAY: ${memeCount}`;
+            
+            // Fun effect
+            memeCountElement.style.transform = "scale(1.2)";
+            setTimeout(() => {
+                memeCountElement.style.transform = "scale(1)";
+            }, 300);
+        }
+        
+        // Initialize with first meme count
+        updateMemeCount();
+    </script>
+</body>
+</html>
